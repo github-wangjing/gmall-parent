@@ -9,6 +9,6 @@ public class TestApiController {
     @RequestMapping("test")
     public String test(){
 
-        return "hello,world，sddf";
+        return "hello,world，git";
     }
 }
