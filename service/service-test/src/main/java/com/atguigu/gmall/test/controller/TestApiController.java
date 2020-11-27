@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestApiController {
     @RequestMapping("test")
     public String test(){
-        return "hello,world";
+
+        return "hello,world，sddf";
     }
 }
