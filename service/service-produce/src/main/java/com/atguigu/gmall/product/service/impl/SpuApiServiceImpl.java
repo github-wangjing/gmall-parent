@@ -64,7 +64,6 @@ public class SpuApiServiceImpl implements SpuApiService {
                         spuSaleAttrValue.setSpuId(spu_id);
                         spuSaleAttrValue.setBaseSaleAttrId(baseSaleAttrId);
                         spuSaleAttrValue.setSaleAttrName(spuSaleAttr.getSaleAttrName());
-
                         spuSaleAttrValueMapper.insert(spuSaleAttrValue);
                     }
                 }
