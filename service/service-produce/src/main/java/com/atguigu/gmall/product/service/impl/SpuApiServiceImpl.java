@@ -50,6 +50,10 @@ public class SpuApiServiceImpl implements SpuApiService {
         List<SpuImage> spuImageList = spuInfo.getSpuImageList();
         if (null!=spuImageList){
             //遍历
+            for (SpuImage spuImage : spuImageList) {
+                spuImage.setSpuId(spu_id);
+                spuImageMapper.insert(spuImage);
+            }
         }
         List<SpuSaleAttr> spuSaleAttrList = spuInfo.getSpuSaleAttrList();
         if (null!=spuSaleAttrList){
@@ -71,4 +75,30 @@ public class SpuApiServiceImpl implements SpuApiService {
             }
         }
     }
+    //sku添加页面的图片查询
+    @Override
+    public List<SpuImage> spuImageList(Long spuId) {
+        QueryWrapper<SpuImage> wrapper = new QueryWrapper<>();
+        wrapper.eq("spu_id",spuId);
+        List<SpuImage> spuImageList = spuImageMapper.selectList(wrapper);
+        return spuImageList;
+    }
+
+    //sku添加页面的销售属性查询
+    @Override
+    public List<SpuSaleAttr> spuSaleAttrList(Long spuId) {
+        QueryWrapper<SpuSaleAttr> wrapper = new QueryWrapper<>();
+        wrapper.eq("spu_id",spuId);
+        List<SpuSaleAttr> spuSaleAttrList = spuSaleAttrMapper.selectList(wrapper);
+
+        for (SpuSaleAttr spuSaleAttr : spuSaleAttrList) {
+            QueryWrapper<SpuSaleAttrValue> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("spu_id",spuId);
+            queryWrapper.eq("base_sale_attr_id",spuSaleAttr.getBaseSaleAttrId());
+            List<SpuSaleAttrValue> spuSaleAttrValues = spuSaleAttrValueMapper.selectList(queryWrapper);
+            spuSaleAttr.setSpuSaleAttrValueList(spuSaleAttrValues);
+        }
+        return spuSaleAttrList;
+    }
+
 }
