@@ -13,7 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>service-test</module>
-        <module>service-produce</module>
+        <module>service-product</module>
+        <module>service-item</module>
     </modules>
 
     <dependencies>
